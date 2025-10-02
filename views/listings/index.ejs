@@ -1,0 +1,333 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+#filters {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.scroll-button {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.scroll-button:hover:not(:disabled) {
+    border-color: #222;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.scroll-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.scroll-button i {
+    font-size: 0.8rem;
+    color: #222;
+}
+
+.filters-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.filters-scroll {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+    padding: 0.25rem 0;
+}
+
+.filters-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: fit-content;
+    text-decoration: none;
+    color: #717171;
+}
+
+.filter:hover {
+    color: #000;
+    border-bottom-color: #e0e0e0;
+}
+
+.filter.active {
+    color: #000;
+    border-bottom-color: #222;
+}
+
+.filter i {
+    font-size: 1.1rem;
+    transition: color 0.2s ease;
+}
+
+.filter p {
+    font-size: 0.7rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.tax-info {
+    display: none;
+}
+
+.tax-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: white;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.tax-toggle label {
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+/* Tablet Styles */
+@media (max-width: 768px) {
+    #filters {
+        padding: 0.75rem 1rem;
+    }
+
+    .scroll-button {
+        width: 28px;
+        height: 28px;
+    }
+
+    .filter {
+        padding: 0.4rem 0.6rem;
+    }
+
+    .filter i {
+        font-size: 1rem;
+    }
+
+    .filter p {
+        font-size: 0.65rem;
+    }
+
+    .tax-toggle {
+        padding: 0.4rem 0.6rem;
+    }
+
+    .tax-toggle label {
+        font-size: 0.7rem;
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 480px) {
+    #filters {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .scroll-button {
+        width: 24px;
+        height: 24px;
+    }
+
+    .scroll-button i {
+        font-size: 0.7rem;
+    }
+
+    .filter {
+        padding: 0.4rem 0.5rem;
+        gap: 0.2rem;
+    }
+
+    .filter i {
+        font-size: 0.95rem;
+    }
+
+    .filter p {
+        font-size: 0.6rem;
+    }
+
+    .tax-toggle {
+        padding: 0.4rem 0.5rem;
+    }
+
+    .tax-toggle label {
+        font-size: 0.65rem;
+    }
+}
+</style>
+
+<div id="filters">
+    <button class="scroll-button" id="scrollLeft">
+        <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    
+    <div class="filters-container">
+        <div class="filters-scroll" id="filtersScroll">
+            <a href="/listings" class="filter <%= selectedCategory === 'All' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-layer-group"></i></div>
+                <p>All</p>
+            </a>
+            
+            <a href="/listings?category=Trending" class="filter <%= selectedCategory === 'Trending' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-fire"></i></div>
+                <p>Trending</p>
+            </a>
+            
+            <a href="/listings?category=Rooms" class="filter <%= selectedCategory === 'Rooms' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-bed"></i></div>
+                <p>Rooms</p>
+            </a>
+            
+            <a href="/listings?category=Iconic cities" class="filter <%= selectedCategory === 'Iconic cities' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-city"></i></div>
+                <p>Iconic cities</p>
+            </a>
+            
+            <a href="/listings?category=Mountains" class="filter <%= selectedCategory === 'Mountains' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-mountain"></i></div>
+                <p>Mountains</p>
+            </a>
+
+            <a href="/listings?category=Beaches" class="filter <%= selectedCategory === 'Beaches' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-umbrella-beach"></i></div>
+                <p>Beaches</p>
+            </a>
+            
+            <a href="/listings?category=Castles" class="filter <%= selectedCategory === 'Castles' ? 'active' : '' %>">
+                <div><i class="fa-brands fa-fort-awesome"></i></div>
+                <p>Castles</p>
+            </a>
+            
+            <a href="/listings?category=Amazing pools" class="filter <%= selectedCategory === 'Amazing pools' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-water-ladder"></i></div>
+                <p>Amazing pools</p>
+            </a>
+            
+            <a href="/listings?category=Camping" class="filter <%= selectedCategory === 'Camping' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-campground"></i></div>
+                <p>Camping</p>
+            </a>
+            
+            <a href="/listings?category=Farms" class="filter <%= selectedCategory === 'Farms' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-tractor"></i></div>
+                <p>Farms</p>
+            </a>
+            
+            <a href="/listings?category=Arctic" class="filter <%= selectedCategory === 'Arctic' ? 'active' : '' %>">
+                <div><i class="fa-solid fa-snowflake"></i></div>
+                <p>Arctic</p>
+            </a>
+        </div>
+    </div>
+
+    <button class="scroll-button" id="scrollRight">
+        <i class="fa-solid fa-chevron-right"></i>
+    </button>
+    
+    <div class="tax-toggle">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+            <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+        </div>
+    </div>
+</div>
+
+
+    
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+        <% for(let listing of allListings) { %> 
+        <a href="/listings/<%= listing._id %>" class="listing-link">
+        <div class="card col listing-card" style="width: 21rem;">
+            <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;">
+            <div class="card-img-overlay"></div>
+            <div class="card-body">
+                <p class="card-text" data-base-price="<%= listing.price %>">   <!-- gpt -->
+                <b><%= listing.title %></b> <br>
+                &#x20B9;<%= listing.price.toLocaleString("en-IN") %> / night
+                <i class="tax-info"> &nbsp;&nbsp;+18% GST</i>
+                </p>
+            </div>
+        </div>
+        </a>
+        <% } %>
+    </div>
+
+    <script>
+        let taxSwitch = document.getElementById("switchCheckDefault");
+        taxSwitch.addEventListener("click", () => {
+            let taxInfo = document.getElementsByClassName("tax-info");
+            for(info of taxInfo) {
+                if(info.style.display != "inline") {
+                    info.style.display = "inline";
+                } else {
+                    info.style.display = "none";
+                }
+                
+            }
+        });
+
+
+
+    // Scroll button functionality
+    const filtersScroll = document.getElementById('filtersScroll');
+    const scrollLeftBtn = document.getElementById('scrollLeft');
+    const scrollRightBtn = document.getElementById('scrollRight');
+
+    function updateScrollButtons() {
+        const isAtStart = filtersScroll.scrollLeft <= 0;
+        const isAtEnd = filtersScroll.scrollLeft >= filtersScroll.scrollWidth - filtersScroll.clientWidth - 1;
+        
+        scrollLeftBtn.disabled = isAtStart;
+        scrollRightBtn.disabled = isAtEnd;
+    }
+
+    scrollLeftBtn.addEventListener('click', () => {
+        filtersScroll.scrollBy({ left: -200, behavior: 'smooth' });
+    });
+
+    scrollRightBtn.addEventListener('click', () => {
+        filtersScroll.scrollBy({ left: 200, behavior: 'smooth' });
+    });
+
+    filtersScroll.addEventListener('scroll', updateScrollButtons);
+    window.addEventListener('resize', updateScrollButtons);
+    
+    updateScrollButtons();
+    </script>

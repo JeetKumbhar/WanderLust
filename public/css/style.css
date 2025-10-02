@@ -1,0 +1,320 @@
+body {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+/* Navbar */
+.navbar {
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-compass {
+    color: #fe242d;
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+/* footer */
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links, .f-info-socials, .f-info-brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.f-info {
+    text-align: center;
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+/* Cards */
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.listing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    transition: transform 0.4s ease;
+}
+
+.listing-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.card-body {
+    padding: 0.75rem 0 !important;
+    transition: all 0.3s ease;
+}
+
+.card-text {
+    color: #222;
+    margin: 0;
+    line-height: 1.5;
+    padding-left: 1rem;
+}
+
+.card-text b {
+    font-weight: 600 !important;
+    font-size: 0.95rem;
+    color: #222;
+    display: block;
+    margin-bottom: 0.25rem;
+    transition: color 0.3s ease;
+}
+
+.listing-card:hover .card-text b {
+    color: #000;
+}
+
+.card-text p {
+    font-weight: 400 !important;
+    color: #717171;
+    font-size: 0.9rem;
+}
+
+.listing-link {
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+/* Card Image Container */
+.listing-card > div:first-child {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+/* Card Effect - Improved Overlay */
+.card-img-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: linear-gradient(
+        180deg, 
+        rgba(0, 0, 0, 0.05) 0%, 
+        rgba(0, 0, 0, 0.02) 100%
+    );
+    border-radius: 1rem;
+}
+
+.listing-card:hover .card-img-overlay {
+    opacity: 1;
+}
+
+/* Price Styling */
+.card-text {
+    font-size: 0.9rem;
+}
+
+.tax-info {
+    color: #717171;
+    font-size: 0.85rem;
+    font-style: normal;
+}
+
+/* Wishlist/Favorite Button (Optional Enhancement) */
+.card-favorite {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.listing-card:hover .card-favorite {
+    opacity: 1;
+}
+
+.card-favorite:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 1);
+}
+
+.card-favorite i {
+    color: #222;
+    font-size: 0.9rem;
+}
+
+/* Rating Badge (Optional Enhancement) */
+.card-rating {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.listing-card:hover .card-rating {
+    opacity: 1;
+}
+
+.card-rating i {
+    color: #FFB400;
+    font-size: 0.75rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .listing-card {
+        margin-bottom: 1.5rem;
+    }
+
+    .listing-card:hover {
+        transform: translateY(-2px);
+    }
+
+    .card-text b {
+        font-size: 0.9rem;
+    }
+
+    .card-text {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .listing-card {
+        margin-bottom: 1rem;
+    }
+
+    .card-body {
+        padding: 0.5rem 0 !important;
+    }
+
+    .card-text b {
+        font-size: 0.85rem;
+    }
+
+    .card-text {
+        font-size: 0.8rem;
+    }
+
+    .tax-info {
+        font-size: 0.75rem;
+    }
+}
+
+/* Loading State (Optional) */
+.listing-card.loading {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.listing-card.loading .card-img-top {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* New page */
+
+.add-btn {
+    background-color: #fe242d !important;
+    border: none !important;
+}
+
+/* Edit Page */
+
+.edit-btn {
+    background-color: #fe242d !important;
+    border: none !important;
+}
+
+/* Show Page */
+
+.show-img {
+    height: 30vh;
+    margin-bottom: 20px;
+}
+
+.show-img img {
+    max-height: 200px;
+    max-width: 300px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    display: block; /* Removes any inline spacing issues */
+}
+
+.btns {
+    display: flex;
+
+}
+
+.show-card {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#map {
+    height: 300px;
+    width: 80vh;
+}
+
