@@ -9,20 +9,6 @@ body {
     flex: 1;
 }
 
-/* Navbar */
-.navbar {
-    height: 5rem;
-    background-color: white;
-}
-
-.fa-compass {
-    color: #fe242d;
-    font-size: 2rem;
-}
-
-.nav-link {
-    color: #222222 !important;
-}
 
 /* footer */
 .f-info-links a {
@@ -287,34 +273,345 @@ body {
 }
 
 /* Show Page */
+/* Show Page - Base Styles */
+.show-card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
 
 .show-img {
-    height: 30vh;
-    margin-bottom: 20px;
-}
-
-.show-img img {
-    max-height: 200px;
-    max-width: 300px;
+    width: 100%;
+    height: 400px;
     object-fit: cover;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-    display: block; /* Removes any inline spacing issues */
 }
 
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-text {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    color: #484848;
+}
+
+/* Title Styling */
+h3 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #222222;
+    margin-bottom: 1rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #222222;
+    margin-bottom: 1.5rem;
+}
+
+/* Edit and Delete Buttons */
 .btns {
     display: flex;
-
+    gap: 1rem;
+    margin: 2rem 0;
+    align-items: center;
 }
 
-.show-card {
-    padding-left: 0;
-    padding-right: 0;
+.edit-btn,
+.delete-btn {
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
+.edit-btn {
+    background-color: #222222;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #484848;
+}
+
+.delete-btn {
+    background-color: #fe242d;
+    color: white;
+    border: none;
+}
+
+.delete-btn:hover {
+    background-color: #e21e26;
+}
+
+/* Review Card Styles */
+.card {
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #222222;
+    margin-bottom: 0.5rem;
+}
+
+/* Map Container */
 #map {
-    height: 300px;
-    width: 80vh;
+    height: 400px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
 }
 
+/* Form Styling */
+.form-label {
+    font-weight: 600;
+    color: #222222;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+}
+
+.form-control:focus {
+    border-color: #fe242d;
+    box-shadow: 0 0 0 0.2rem rgba(254, 36, 45, 0.15);
+}
+
+/* Submit Button */
+.btn-outline-dark {
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-dark:hover {
+    background-color: #222222;
+    color: white;
+}
+
+/* Desktop Styles (769px and above) */
+@media (min-width: 769px) {
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+/* Tablet and Mobile Styles (768px and below) */
+@media (max-width: 768px) {
+    /* Remove offset classes on mobile */
+    .col-8.offset-3,
+    .col-6.offset-3 {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding: 0 1rem;
+    }
+    
+    /* Title */
+    h3 {
+        font-size: 1.5rem;
+        text-align: center;
+        padding: 0 1rem;
+    }
+    
+    h4 {
+        font-size: 1.25rem;
+    }
+    
+    /* Show Card */
+    .show-card {
+        margin: 0 1rem 2rem 1rem;
+        border-radius: 12px;
+    }
+    
+    .show-img {
+        height: 300px;
+        border-radius: 12px 12px 0 0;
+    }
+    
+    .card-body {
+        padding: 1.25rem;
+    }
+    
+    .card-text {
+        font-size: 0.95rem;
+        margin-bottom: 0.6rem;
+    }
+    
+    /* Buttons Container */
+    .btns {
+        flex-direction: column;
+        padding: 0 1rem;
+        gap: 0.75rem;
+        margin: 1.5rem 0;
+    }
+    
+    .col-1.offset-3 {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+    
+    .edit-btn {
+        width: 100%;
+        padding: 0.875rem;
+        font-size: 1rem;
+    }
+    
+    .btns form {
+        width: 100%;
+        margin: 0 !important;
+    }
+    
+    .delete-btn {
+        width: 100%;
+        padding: 0.875rem;
+        font-size: 1rem;
+        margin-left: 0 !important;
+    }
+    
+    .offset-5 {
+        margin-left: 0 !important;
+    }
+    
+    /* Review Section */
+    .mb-3.mt-3 {
+        margin-top: 1rem !important;
+    }
+    
+    /* Review Cards */
+    .card.col-5 {
+        width: 100% !important;
+        margin: 0 0 1rem 0 !important;
+    }
+    
+    .card .btn-sm {
+        width: 100%;
+        padding: 0.5rem;
+    }
+    
+    /* Map Container */
+    #map {
+        height: 300px;
+        border-radius: 8px;
+    }
+    
+    /* Form Elements */
+    textarea.form-control {
+        font-size: 1rem;
+    }
+    
+    .btn-outline-dark {
+        width: 100%;
+        padding: 0.875rem;
+        font-size: 1rem;
+    }
+    
+    /* Star Rating */
+    .starability-slot {
+        display: flex;
+        justify-content: center;
+        margin: 1rem 0;
+    }
+}
+
+/* Small Mobile Styles (480px and below) */
+@media (max-width: 480px) {
+    h3 {
+        font-size: 1.35rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    h4 {
+        font-size: 1.15rem;
+    }
+    
+    .show-img {
+        height: 250px;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .card-text {
+        font-size: 0.9rem;
+    }
+    
+    #map {
+        height: 250px;
+    }
+    
+    .edit-btn,
+    .delete-btn,
+    .btn-outline-dark {
+        padding: 0.75rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* Additional Responsive Utilities */
+@media (max-width: 768px) {
+    /* Ensure proper spacing */
+    .mt-3 {
+        margin-top: 1rem !important;
+    }
+    
+    .mb-3 {
+        margin-bottom: 1rem !important;
+    }
+    
+    /* Remove extra margins from Bootstrap grid */
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    /* Review section spacing */
+    hr {
+        margin: 1.5rem 0;
+    }
+    
+    /* All Reviews heading */
+    .row p b {
+        font-size: 1.1rem;
+    }
+}
+
+/* Touch-friendly elements */
+@media (max-width: 768px) {
+    .btn,
+    .form-control,
+    .card {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Ensure minimum touch target size */
+    .btn {
+        min-height: 44px;
+    }
+}
+
+/* Improve image loading on mobile */
+@media (max-width: 768px) {
+    .show-img {
+        background-color: #f0f0f0;
+    }
+}
