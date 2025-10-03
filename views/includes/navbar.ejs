@@ -1,8 +1,8 @@
 <style>
-/* Navbar Base Styles */
-.navbar {
-    padding: 0.75rem 1rem;
-    background-color: white;
+/* Navbar Base Styles - Higher Specificity */
+nav.navbar {
+    padding: 0.75rem 1rem !important;
+    background-color: white !important;
 }
 
 .navbar-brand {
@@ -15,20 +15,20 @@
     font-size: 2rem;
 }
 
-.nav-link {
+.navbar .nav-link {
     color: #222222 !important;
     padding: 0.5rem 1rem !important;
     font-size: 0.95rem;
 }
 
-.nav-link:hover {
+.navbar .nav-link:hover {
     color: #fe242d !important;
 }
 
 /* Search Button Styles */
 .search-btn {
-    background-color: #fe242d;
-    color: #fff;
+    background-color: #fe242d !important;
+    color: #fff !important;
     border-radius: 25px;
     padding: 0.5rem 1.5rem;
     border: none;
@@ -37,8 +37,8 @@
 }
 
 .search-btn:hover {
-    background-color: #e21e26;
-    color: #fff;
+    background-color: #e21e26 !important;
+    color: #fff !important;
 }
 
 .search-btn i {
@@ -60,23 +60,23 @@
 
 /* Desktop Styles (769px and above) */
 @media (min-width: 769px) {
-    .navbar {
-        padding: 0.75rem 2rem;
+    nav.navbar {
+        padding: 0.75rem 2rem !important;
     }
     
-    .navbar-nav {
+    .navbar .navbar-nav {
         align-items: center;
     }
     
-    .d-flex {
+    .navbar form.d-flex {
         margin: 0 1rem;
     }
 }
 
 /* Tablet and Mobile Styles (768px and below) */
 @media (max-width: 768px) {
-    .navbar {
-        padding: 0.75rem 1rem;
+    nav.navbar {
+        padding: 0.75rem 1rem !important;
     }
     
     .fa-compass {
@@ -88,67 +88,84 @@
         margin-top: 1rem;
     }
     
-    .navbar-nav {
-        width: 100%;
+    .navbar .navbar-nav {
+        width: 100% !important;
         margin-bottom: 1rem !important;
-    }
-    
-    .navbar-nav.ms-auto {
         margin-left: 0 !important;
     }
     
-    .nav-link {
-        padding: 0.75rem 0 !important;
+    .navbar .navbar-nav.ms-auto {
+        margin-left: 0 !important;
+    }
+    
+    .navbar .nav-link {
+        padding: 0.75rem 0.5rem !important;
         display: block;
+        width: 100%;
     }
     
     /* Search form full width on mobile */
-    .d-flex {
-        width: 100%;
+    .navbar form.d-flex {
+        width: 100% !important;
         flex-direction: column !important;
         gap: 0.75rem;
         margin-bottom: 1rem;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
     
-    .search-inp {
-        width: 100%;
+    .navbar .search-inp {
+        width: 100% !important;
         margin: 0 !important;
         padding: 0.75rem 1.25rem;
         font-size: 1rem;
     }
     
-    .search-btn {
-        width: 100%;
+    .navbar .search-btn {
+        width: 100% !important;
         padding: 0.75rem 1.5rem;
         font-size: 1rem;
+        margin: 0 !important;
     }
     
     .search-btn i {
         margin-right: 0.5rem;
     }
+    
+    /* Add spacing between navigation sections */
+    .navbar .navbar-nav + .navbar-nav {
+        padding-top: 0.5rem;
+        border-top: 1px solid #f0f0f0;
+        margin-top: 0.5rem;
+    }
+    
+    /* Ensure proper spacing for auth links */
+    .navbar .navbar-nav:last-child {
+        padding-bottom: 0.5rem;
+    }
 }
 
 /* Small Mobile Styles (480px and below) */
 @media (max-width: 480px) {
-    .navbar {
-        padding: 0.5rem 0.75rem;
+    nav.navbar {
+        padding: 0.5rem 0.75rem !important;
     }
     
     .fa-compass {
         font-size: 1.5rem;
     }
     
-    .nav-link {
-        padding: 0.6rem 0 !important;
+    .navbar .nav-link {
+        padding: 0.6rem 0.5rem !important;
         font-size: 0.95rem;
     }
     
-    .search-inp {
+    .navbar .search-inp {
         padding: 0.7rem 1rem;
         font-size: 0.95rem;
     }
     
-    .search-btn {
+    .navbar .search-btn {
         padding: 0.7rem 1.25rem;
         font-size: 0.95rem;
     }
@@ -156,42 +173,30 @@
 
 /* Navbar Toggler */
 .navbar-toggler {
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
     padding: 0.5rem 0.75rem;
 }
 
 .navbar-toggler:focus {
-    box-shadow: none;
-    border-color: #fe242d;
-}
-
-/* Additional responsive utilities */
-@media (max-width: 768px) {
-    /* Add spacing between navigation sections */
-    .navbar-nav + .navbar-nav {
-        padding-top: 0.5rem;
-        border-top: 1px solid #f0f0f0;
-        margin-top: 0.5rem;
-    }
-    
-    /* Ensure proper spacing for auth links */
-    .navbar-nav:last-child {
-        padding-bottom: 0.5rem;
-    }
+    box-shadow: none !important;
+    border-color: #fe242d !important;
 }
 
 /* Improve touch targets on mobile */
 @media (max-width: 768px) {
-    .nav-link,
-    .search-btn {
+    .navbar .nav-link,
+    .navbar .search-btn {
         min-height: 44px;
         display: flex;
         align-items: center;
-        justify-content: center;
     }
     
-    .nav-link {
+    .navbar .nav-link {
         justify-content: flex-start;
+    }
+    
+    .navbar .search-btn {
+        justify-content: center;
     }
 }
 </style>
