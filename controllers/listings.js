@@ -1,17 +1,28 @@
 const Listing = require("../models/listing");
 
 module.exports.index = async (req, res) => {
-    const { category } = req.query;     
-     let filter = {};
-     // If category is provided, filter by it
-    if (category) {
-        filter.category = category;
+    const { category, search } = req.query;
+    let query = {};
+    
+    // Apply search filter (location or country)
+    if (search) {
+        query.$or = [
+            { location: { $regex: search, $options: 'i' } },
+            { country: { $regex: search, $options: 'i' } }
+        ];
     }
-
-    const allListings = await Listing.find(filter);
-
-    res.render("listings/index.ejs", {allListings,
-        selectedCategory: category || 'All' // Pass selected category to template  ---CLAUDE
+    
+    // Apply category filter (only if not searching)
+    if (category && category !== 'All' && !search) {
+        query.category = category;
+    }
+    
+    const allListings = await Listing.find(query);
+    
+    res.render("listings/index", { 
+        allListings, 
+        selectedCategory: search ? 'All' : (category || 'All'),
+        searchQuery: search || ''
     });
 };
 
